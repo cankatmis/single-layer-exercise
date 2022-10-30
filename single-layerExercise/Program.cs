@@ -11,35 +11,7 @@ namespace single_layerExercise
         static void Main(string[] args)
         {
             UserTweetContext ctx = new UserTweetContext();
-            User u = new User();
-            u.UserName = "test_user";
-            u.UserEmail = "aaa@gmail.com";
-            u.Tweets = new List<Tweet>();
-            u.Tweets.Add(new Tweet()
-            {
-                Content = "aaaadfadfadf",
-                Flagged = true,
-                Year = 2022
-            });
-
-            ctx.Users.Add(u);
-            ctx.SaveChanges();
-
-            foreach (var item in ctx.Users)
-            {
-                Console.WriteLine(item);
-            }
-
             List<User> users = UserTweetManager.XMLReader().ToList();
-            foreach (var item in users)
-            {
-                Console.WriteLine($"{item.UserName}");
-                foreach (var tweets in item.Tweets)
-                {
-                    Console.WriteLine(tweets.Content);
-                }
-                Console.WriteLine("---");
-            }
 
             foreach (var user in users)
             {
@@ -49,17 +21,17 @@ namespace single_layerExercise
                 }
                 else
                 {
-                    Console.WriteLine($"{user} was not fulfilled the requiremenets!");
+                    Console.WriteLine($"{user}: not fulfilled the requirements.\n");
                 }
             }
             ctx.SaveChanges();
 
-            UserTweetManager.GetUsersWithHotmailAccount(ctx).ToConsole("Q1");
-            UserTweetManager.GetUsersWithAtLeastOneOldTweet(ctx).ToConsole("Q2");
-            UserTweetManager.GetUsersWithTweetCount(ctx).ToConsole("Q3");
-            UserTweetManager.AverageTweetLengthByFlag(ctx).ToConsole("Q4");
-            UserTweetManager.SumOfTweetYearsByFlag(ctx).ToConsole("Q5");
-            UserTweetManager.GetTweetNumberForMailType(ctx).ToConsole("Q6");
+            UserTweetManager.GetUsersWithHotmailAccount(ctx).ToConsole("Get Users With Hotmail Account");
+            UserTweetManager.GetUsersWithAtLeastOneOldTweet(ctx).ToConsole("Get Users With AtLeast One Old Tweet");
+            UserTweetManager.GetUsersWithTweetCount(ctx).ToConsole("Get Users With Tweet Count");
+            UserTweetManager.AverageTweetLengthByFlag(ctx).ToConsole("Average Tweet Length By Flag");
+            UserTweetManager.SumOfTweetYearsByFlag(ctx).ToConsole("Sum Of Tweet Years By Flag");
+            UserTweetManager.GetTweetNumberForMailType(ctx).ToConsole("Get Tweet Number For Mail Type");
 
         }
     }

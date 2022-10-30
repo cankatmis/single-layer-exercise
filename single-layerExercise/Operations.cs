@@ -11,12 +11,12 @@ namespace single_layerExercise
     {
         public static void ToConsole<T>(this IEnumerable<T> input, string header)
         {
-            Console.WriteLine(header);
+            Console.WriteLine($"-----------{header}-----------");
             foreach (var item in input)
             {
                 Console.WriteLine(item);
             }
-            Console.WriteLine(header);
+            Console.WriteLine();
         }
     }
 }
